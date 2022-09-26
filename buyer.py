@@ -26,3 +26,9 @@ class Buyer:
 
     def get_coins_spent(self) -> int:
         return self.__coins_spent
+
+    def get_buyer_id(self) -> int:
+        return self.__buyer_id
+
+    def __str__(self):
+        return f"Buyer name: {self.__buyer_name}\nBuyer ID: {self.__buyer_id}"
