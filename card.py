@@ -51,7 +51,6 @@ class Card:
 ██║ Team: {str(self.__team)}
 ██║ Price: {str(self.__price)}
 ██║ For Sale: {str(self.__for_sale)}
-██║
 ████████████████████████████████╗
 ╚═══════════════════════════════╝
 """
