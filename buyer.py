@@ -1,16 +1,14 @@
 class Buyer:
     @classmethod
-    def create_buyer(cls, buyer_name: str, buyer_id: int):
-        return cls(buyer_name=buyer_name, buyer_id=buyer_id, coins=0, coins_spent=0)
+    def create_buyer(cls, buyer_name: str):
+        return cls(buyer_name=buyer_name, coins=0, coins_spent=0)
 
     __buyer_name: str
-    __buyer_id: int
     __coins: int
     __coins_spent: int
 
-    def __init__(self, buyer_name: str, buyer_id: int, coins: int, coins_spent: int) -> None:
+    def __init__(self, buyer_name: str, coins: int, coins_spent: int) -> None:
         self.__buyer_name = buyer_name
-        self.__buyer_id = buyer_id
         self.__coins = coins
         self.__coins_spent = coins_spent
 
@@ -27,8 +25,5 @@ class Buyer:
     def get_coins_spent(self) -> int:
         return self.__coins_spent
 
-    def get_buyer_id(self) -> int:
-        return self.__buyer_id
-
     def __str__(self):
-        return f"Name: {self.__buyer_name}, ID: {self.__buyer_id}"
+        return f"Name: {self.__buyer_name}, Coins Spent: {self.__coins_spent}."

@@ -11,6 +11,7 @@ MENU = '''
                     ██║ Select buyer          (s) ██║
                     ██║ Buyer Menu            (b) ██║
                     ██║ Admin Menu            (a) ██║
+                    ██║ Current User ID      (id) ██║
                     ██║ Exit                  (e) ██║
                     ████████████████████████████████║
                     ╚═══════════════════════════════╝
@@ -34,6 +35,8 @@ SELECT = '''
                             ██╔═══════════════════════════██║
                             ██║ Create New Buyer     (nb) ██║
                             ██║ Select Buyer         (sb) ██║
+                            ██║ Current User ID      (id) ██║
+                            ██║ Help                  (h) ██║
                             ██║ Main Menu             (m) ██║
                             ██║ Exit                  (e) ██║
                             ████████████████████████████████║
@@ -57,6 +60,7 @@ BUYER = '''
                         ██║ Check Balance        (cc) ██║
                         ██║ Add Coins            (ac) ██║
                         ██║ Check Coins Spent    (cs) ██║
+                        ██║ Current User ID      (id) ██║
                         ██║ Help                  (h) ██║
                         ██║ Main Menu             (m) ██║
                         ██║ Exit                  (e) ██║
@@ -74,11 +78,15 @@ ADMIN = '''
 
                         ████████████████████████████████╗
                         ██╔═══════════════════════════██║
+                        ██║ Available Cards      (ac) ██║
                         ██║ List Card           (lcd) ██║
                         ██║ Unlist Card         (ucd) ██║
                         ██║ Listing Pricing      (lp) ██║
                         ██║ Listing Position    (lps) ██║
-                        ██║ Check Market Profit (cmp) ██║
+                        ██║ User list            (ul) ██║
+                        ██║ Check Buyer          (cb) ██║
+                        ██║ Market Profit       (cmp) ██║
+                        ██║ Current User ID      (id) ██║
                         ██║ Help                  (h) ██║
                         ██║ Main Menu             (m) ██║   
                         ██║ Exit                  (e) ██║

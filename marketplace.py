@@ -6,24 +6,28 @@ class Marketplace:
 
     @classmethod
     def create_marketplace(cls):
-        return cls(id_counter=0, card_counter=0, buyer_dict={}, card_dict={}, profit=0)
+        return cls(id_counter=0, card_counter=0, buyer_dict={}, card_dict={}, profit=0, current_id=0)
 
     __id_counter: int
     __card_counter: int
     __buyer_dict: dict[int, Buyer]
     __card_dict: dict[str, Card]
     __market_profit: int
+    __current_id: int
 
-    def __init__(self, id_counter: int, card_counter: int, buyer_dict: dict, card_dict: dict, profit: int) -> None:
+    def __init__(
+            self, id_counter: int, card_counter: int, buyer_dict: dict, card_dict: dict, profit: int, current_id: int
+    ) -> None:
         self.__id_counter = id_counter
         self.__card_counter = card_counter
         self.__buyer_dict = buyer_dict
         self.__card_dict = card_dict
         self.__market_profit = profit
+        self.__current_id = current_id
 
     def create_new_buyer(self, buyer_name: str) -> None:
         self.__id_counter += 1
-        self.__buyer_dict[self.__id_counter] = Buyer.create_buyer(buyer_name, self.__id_counter)
+        self.__buyer_dict[self.__id_counter] = Buyer.create_buyer(buyer_name)
 
     def list_card(self, name: str, overall: int, position: str, club: str, price: int) -> None:
         can_be_sold = False
@@ -50,6 +54,9 @@ class Marketplace:
         if can_be_sold and position in Card.POSITIONS.keys():
             self.__card_dict[name] = Card.create_card(name, overall, position, club, price)
 
+    def select_id(self, input_id: int) -> None:
+        self.__current_id = input_id
+
     def purchase(self, card_name: str, buyer_id: int) -> None:
         amount = self.__card_dict.get(card_name).get_price()
         self.__card_dict.get(card_name).remove_from_sale()
@@ -58,6 +65,9 @@ class Marketplace:
 
     def add_buyer_coins(self, buyer_id: int, amount: int) -> None:
         self.__buyer_dict.get(buyer_id).add_coins(amount)
+
+    def get_current_id(self) -> int:
+        return self.__current_id
 
     def get_market_profit(self) -> int:
         return self.__market_profit
@@ -77,7 +87,7 @@ class Marketplace:
         return self.__card_dict.get(card_name).get_price()
 
     def has_cards_for_sale(self) -> bool:
-        return self.__card_dict != {}
+        return len(self.__card_dict) > 0
 
     def has_card(self, card_name: str) -> bool:
         return card_name in self.__card_dict.keys()
@@ -91,14 +101,25 @@ class Marketplace:
     def buyer_exists(self, buyer_id: int):
         return buyer_id in self.__buyer_dict.keys()
 
+    def has_buyers(self) -> bool:
+        return len(self.__buyer_dict) > 0
+
     def get_buyer_list(self) -> str:
         buyer_list = ""
         for buyer in self.__buyer_dict.keys():
             buyer_list += f"██║ {self.__buyer_dict.get(buyer)}\n"
         return buyer_list
 
+    def has_buyer_registered(self, buyer_id: int) -> bool:
+        return buyer_id in self.__buyer_dict.keys()
+
     def get_buyer(self, buyer_id: int) -> Buyer:
         return self.__buyer_dict.get(buyer_id)
+
+    def get_buyer_id(self, name: str) -> int:
+        for dict_id, dict_name in self.__buyer_dict.items():
+            if dict_name == name:
+                return dict_id
 
     def get_buyer_balance(self, buyer_id: int) -> int:
         return self.__buyer_dict.get(buyer_id).get_balance()
