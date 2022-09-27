@@ -5,18 +5,17 @@ from card import Card
 
 class Marketplace:
 
-    # buyer id nao esta correto.
-
     @classmethod
     def create_marketplace(cls, buyer_name, buyer_id):
-        return cls(buyer=Buyer.create_buyer(buyer_name, buyer_id), card=None)
+        return cls(id_counter=0, buyer=Buyer.create_buyer(buyer_name, buyer_id), card=None)
 
-    __buyer_id_counter: int
+    __id_counter: int
+    __market_profit: float
     __buyer: Buyer
     __card: Optional[Card]
 
-    def __init__(self, buyer_id_counter: int, buyer: Buyer, card: Card | None) -> None:
-        self.__buyer_id_counter = buyer_id_counter
+    def __init__(self, id_counter: int, buyer: Buyer, card: Card | None) -> None:
+        self.__id_counter = id_counter
         self.__buyer = buyer
         self.__card = card
 
@@ -46,12 +45,13 @@ class Marketplace:
             self.__card = Card.create_card(name, overall, position, club, price)
 
     def purchase(self) -> None:
-
-
+        amount = self.__card.get_price()
+        self.__card = None
+        self.__market_profit += amount
+        self.__buyer.purchase(amount)
 
     def reject_card(self) -> None:
-
-
+        self.__card.remove_from_sale()
 
     def remove_card(self) -> None:
         self.__card = None
@@ -60,7 +60,7 @@ class Marketplace:
         self.__buyer.add_coins(amount)
 
     def get_market_profit(self) -> float:
-        return self.__buyer.get_coins_spent()
+        return self.__market_profit
 
     def get_card_stats(self) -> Card:
         return self.__card
@@ -78,7 +78,7 @@ class Marketplace:
         return self.__card.is_for_sale() and self.__buyer.get_balance() >= self.__card.get_price()
 
     def get_buyer(self) -> Buyer:
-        return self.__buyer.__str__()
+        return self.__buyer
 
     def get_buyer_balance(self) -> int:
         return self.__buyer.get_balance()
