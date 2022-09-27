@@ -31,4 +31,4 @@ class Buyer:
         return self.__buyer_id
 
     def __str__(self):
-        return f"Buyer name: {self.__buyer_name}\nBuyer ID: {self.__buyer_id}"
+        return f"Name: {self.__buyer_name}, ID: {self.__buyer_id}"
