@@ -105,7 +105,7 @@ class Marketplace:
         return len(self.__buyer_dict) > 0
 
     def get_buyer_list(self) -> str:
-        buyer_list = ""
+        buyer_list = "\n██╗ Registered buyers:\n"
         for buyer in self.__buyer_dict.keys():
             buyer_list += f"██║ {self.__buyer_dict.get(buyer)}\n"
         return buyer_list
@@ -117,9 +117,9 @@ class Marketplace:
         return self.__buyer_dict.get(buyer_id)
 
     def get_buyer_id(self, name: str) -> int:
-        for dict_id, dict_name in self.__buyer_dict.items():
-            if dict_name == name:
-                return dict_id
+        for key, value in self.__buyer_dict.items():
+            if value.get_username() == name:
+                return key
 
     def get_buyer_balance(self, buyer_id: int) -> int:
         return self.__buyer_dict.get(buyer_id).get_balance()
@@ -129,3 +129,7 @@ class Marketplace:
 
     def remove_card(self, card_name: str) -> None:
         del self.__card_dict[card_name]
+
+    def print_cenas(self):
+        for key, value in self.__buyer_dict.items():
+            print(f"key: {key}, Value {value}")

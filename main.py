@@ -6,10 +6,10 @@ if __name__ == '__main__':
     command = ''
     marketplace = Marketplace.create_marketplace()
     print(docs.LOGO1)
-    print(docs.MENU)
 
     while command is not None:
 
+        print(docs.MENU)
         command = input("Please select an option: ")
 
         match command:
@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
                             username = input("Name: ")
                             if marketplace.buyer_exists(username):
-                                marketplace.select_id(username)
+                                marketplace.select_id(marketplace.get_buyer_id(username))
                             else:
                                 print(f"\n██╗ {username} is not a valid user user name.\n╚═╝\n")
 
@@ -102,23 +102,22 @@ if __name__ == '__main__':
 
                             case 'cc':
 
-                                marketplace.get_buyer_balance(marketplace.get_current_id())
                                 print(
-                                    '\n██╗ Current Balance: ' + str(marketplace.get_buyer_balance()) + " Coins\n╚═╝\n"
+                                    '\n██╗ Current Balance: ' + str(marketplace.get_buyer_balance(marketplace.get_current_id())) + " Coins\n╚═╝\n"
                                 )
 
                             case 'ac':
 
-                                marketplace.add_buyer_coins(marketplace.get_current_id(), int(input("Amount: ")))
+                                amount = int(input("Amount: "))
+                                marketplace.add_buyer_coins(marketplace.get_current_id(), amount)
                                 print(
-                                    '\n██╗ Current Balance: ' + str(marketplace.get_buyer_balance()) + " Coins\n╚═╝\n"
+                                    '\n██╗ Current Balance: ' + str(marketplace.get_buyer_balance(marketplace.get_current_id())) + " Coins\n╚═╝\n"
                                 )
 
                             case 'cs':
 
-                                marketplace.get_buyer_spent_coins(marketplace.get_current_id())
                                 print(
-                                    '\n██╗ Current Balance: ' + str(marketplace.get_buyer_spent_coins()) + " Coins\n╚═╝\n"
+                                    '\n██╗ Current Balance: ' + str(marketplace.get_buyer_spent_coins(marketplace.get_current_id())) + " Coins\n╚═╝\n"
                                 )
 
                             case 'id':
@@ -196,17 +195,15 @@ if __name__ == '__main__':
 
                             print(docs.POS)
 
-                        case 'ul':
+                        case 'bl':
 
                             if marketplace.has_buyers():
-                                print("\n██╗ Registered buyers:")
-                                marketplace.get_buyer_list()
-                                print("\n╚═╝\n")
+                                print(marketplace.get_buyer_list())
 
                         case 'cb':
 
                             temp_id = int(input("User ID: "))
-                            if marketplace.has_buyer_registered():
+                            if marketplace.has_buyer_registered(temp_id):
                                 print(f"\n██╗ {marketplace.get_buyer(temp_id)}\n╚═╝\n")
 
                         case 'cmp':

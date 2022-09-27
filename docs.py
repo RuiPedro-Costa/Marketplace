@@ -83,10 +83,9 @@ ADMIN = '''
                         ██║ Unlist Card         (ucd) ██║
                         ██║ Listing Pricing      (lp) ██║
                         ██║ Listing Position    (lps) ██║
-                        ██║ User list            (ul) ██║
+                        ██║ Buyer list           (bl) ██║
                         ██║ Check Buyer          (cb) ██║
                         ██║ Market Profit       (cmp) ██║
-                        ██║ Current User ID      (id) ██║
                         ██║ Help                  (h) ██║
                         ██║ Main Menu             (m) ██║   
                         ██║ Exit                  (e) ██║
