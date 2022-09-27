@@ -3,6 +3,7 @@ from card import Card
 
 # dicionarios nao funcionam
 
+
 class Marketplace:
 
     @classmethod
@@ -12,8 +13,8 @@ class Marketplace:
     __id_counter: int
     __card_counter: int
     __market_profit: int
-    __buyer_dict: dict
-    __card_dict: dict
+    __buyer_dict: dict[int, Buyer]
+    __card_dict: dict[str, Card]
 
     def __init__(self, id_counter: int, card_counter: int, buyer_dict: dict, card_dict: dict) -> None:
         self.__id_counter = id_counter
@@ -22,7 +23,8 @@ class Marketplace:
         self.__card_dict = card_dict
 
     def create_new_buyer(self, buyer_name: str) -> None:
-        self.__buyer_dict[self.__id_counter + 1] = Buyer.create_buyer(buyer_name, self.__id_counter + 1)
+        self.__id_counter += 1
+        self.__buyer_dict[self.__id_counter] = Buyer.create_buyer(buyer_name, self.__id_counter)
 
     def list_card(self, name: str, overall: int, position: str, club: str, price: int) -> None:
         can_be_sold = False
