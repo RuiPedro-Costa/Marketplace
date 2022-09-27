@@ -28,11 +28,16 @@ if __name__ == '__main__':
 
                         case 'nb':
 
+                            marketplace.create_new_buyer(input("Name: "))
 
+                        case 'sb':
 
-                        case 'cb':
+                            temp_id = int(input("ID: "))
 
-
+                            if marketplace.buyer_exists(temp_id):
+                                user_id = temp_id
+                            else:
+                                print(f"{temp_id} is not a valid user ID.")
 
                         case 'h':
 
@@ -50,7 +55,7 @@ if __name__ == '__main__':
 
             case 'b':
 
-                print(docs.BUYER2)
+                print(docs.BUYER)
                 cmd = ''
 
                 while cmd is not None:
@@ -61,7 +66,19 @@ if __name__ == '__main__':
 
                         case 'clc':
 
+                            if marketplace.has_cards_for_sale():
+                                marketplace.get_listed_cards()
+                            else:
+                                print("We currently have no cards listed.")
+
                         case 'cst':
+
+                            temp_name = input("Card name: ")
+
+                            if marketplace.has_card(temp_name):
+                                marketplace.get_card_stats(temp_name)
+                            else:
+                                print(f"There is no {temp_name.title()} card available")
 
                         case 'bc':
 
@@ -73,7 +90,7 @@ if __name__ == '__main__':
 
                         case 'h':
 
-                            print(docs.BUYER2)
+                            print(docs.BUYER)
 
                         case 'm':
 

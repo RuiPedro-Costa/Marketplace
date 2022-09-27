@@ -76,6 +76,9 @@ class Marketplace:
     def get_card_price(self, card_name: str) -> int:
         return self.__card_dict.get(card_name).get_price()
 
+    def has_cards_for_sale(self) -> bool:
+        return self.__card_dict != {}
+
     def has_card(self, card_name: str) -> bool:
         return card_name in self.__card_dict.keys()
 
@@ -84,6 +87,9 @@ class Marketplace:
 
     def can_purchase(self, card_name: str, buyer_id: int) -> bool:
         return self.__card_dict[card_name].is_for_sale() and self.__buyer_dict[buyer_id].get_balance() >= self.__card_dict[card_name].get_price()
+
+    def buyer_exists(self, buyer_id: int):
+        return buyer_id in self.__buyer_dict.keys()
 
     def get_buyer_list(self) -> str:
         buyer_list = ""
