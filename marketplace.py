@@ -61,7 +61,8 @@ class Marketplace:
         amount = self.__card_dict.get(card_name).get_price()
         self.__card_dict.get(card_name).remove_from_sale()
         self.__market_profit += amount
-        self.__buyer_dict.get(buyer_id).purchase(amount)
+        self.__buyer_dict.get(buyer_id).purchase(amount, card_name, self.__card_dict[card_name])
+        self.remove_card(card_name)
 
     def add_buyer_coins(self, buyer_id: int, amount: int) -> None:
         self.__buyer_dict.get(buyer_id).add_coins(amount)
@@ -76,7 +77,7 @@ class Marketplace:
         listed_cards = ""
         for card in self.__card_dict.keys():
             listed_cards += (
-                f"██║ Name: {card}, Price: {self.get_card_price(card)}, For sale: {self.card_is_for_sale(card)}\n"
+                f"\n██║ Name: {card}, Price: {self.get_card_price(card)}, For sale: {self.card_is_for_sale(card)}"
             )
         return listed_cards
 
@@ -127,9 +128,17 @@ class Marketplace:
     def get_buyer_spent_coins(self, buyer_id: int) -> int:
         return self.__buyer_dict.get(buyer_id).get_coins_spent()
 
+    def buyer_owns_this_card(self, user_id: int, name: str) -> bool:
+        return self.__buyer_dict[user_id].owns_this_card(name)
+
+    def buyer_has_cards(self, user_id: int) -> bool:
+        return self.__buyer_dict[user_id].has_cards()
+
+    def get_buyer_cards(self, user_id: int) -> str:
+        return self.__buyer_dict[user_id].owned_cards()
+
+    def get_buyer_card_stats(self, user_id: int, name: str) -> str:
+        return self.__buyer_dict[user_id].owned_card_stats(name)
+
     def remove_card(self, card_name: str) -> None:
         del self.__card_dict[card_name]
-
-    def print_cenas(self):
-        for key, value in self.__buyer_dict.items():
-            print(f"key: {key}, Value {value}")

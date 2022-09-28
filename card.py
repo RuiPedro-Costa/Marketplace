@@ -32,9 +32,6 @@ class Card:
     def remove_from_sale(self) -> None:
         self.__for_sale = False
 
-    def get_card_name(self) -> str:
-        return self.__name
-
     def get_price(self) -> int:
         return self.__price
 

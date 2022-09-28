@@ -4,7 +4,7 @@ import docs
 if __name__ == '__main__':
 
     command = ''
-    marketplace = Marketplace.create_marketplace()
+    market = Marketplace.create_marketplace()
     print(docs.LOGO1)
 
     while command is not None:
@@ -28,21 +28,23 @@ if __name__ == '__main__':
                         case 'nb':
 
                             username = input("Name: ")
-                            marketplace.create_new_buyer(username)
-                            marketplace.select_id(marketplace.get_buyer_id(username))
+                            market.create_new_buyer(username)
+                            market.select_id(market.get_buyer_id(username))
+                            cmd = None
 
                         case 'sb':
 
                             username = input("Name: ")
-                            if marketplace.buyer_exists(username):
-                                marketplace.select_id(marketplace.get_buyer_id(username))
+                            if market.buyer_exists(market.get_buyer_id(username)):
+                                market.select_id(market.get_buyer_id(username))
+                                cmd = None
                             else:
                                 print(f"\n██╗ {username} is not a valid user user name.\n╚═╝\n")
 
                         case 'id':
 
-                            if marketplace.get_current_id() > 0:
-                                print(f"\n██╗ Current User ID: {marketplace.get_current_id()}.\n╚═╝\n")
+                            if market.get_current_id() > 0:
+                                print(f"\n██╗ Current User ID: {market.get_current_id()}.\n╚═╝\n")
                             else:
                                 print(f"\n██╗ Not a valid ID.\n╚═╝\n")
 
@@ -61,7 +63,7 @@ if __name__ == '__main__':
 
             case 'b':
 
-                if marketplace.get_current_id() > 0:
+                if market.get_current_id() > 0:
 
                     print(docs.BUYER)
                     cmd = ''
@@ -72,29 +74,49 @@ if __name__ == '__main__':
 
                         match cmd:
 
-                            case 'clc':
+                            case 'lc':
 
-                                if marketplace.has_cards_for_sale():
-                                    marketplace.get_listed_cards()
+                                if market.has_cards_for_sale():
+                                    print(
+                                        f"\n██╗ Current available cards:\n{market.get_listed_cards()}\n╚═╝\n"
+                                    )
                                 else:
-                                    print("\n██╗ We currently have no cards listed.\n╚═╝\n")
+                                    print(f"\n██╗ No card available at the moment.\n╚═╝\n")
 
-                            case 'cst':
+                            case 'lst':
 
-                                temp_name = input("Card name: ")
-                                if marketplace.has_card(temp_name):
-                                    marketplace.get_card_stats(temp_name)
+                                card_name = input("Card name: ")
+                                if market.has_card(card_name):
+                                    market.get_card_stats(card_name)
                                 else:
-                                    print(f"\n██╗ There is no {temp_name.title()} card available.\n╚═╝\n")
+                                    print(f"\n██╗ There is no {card_name.title()} card available.\n╚═╝\n")
+
+                            case 'oc':
+
+                                if market.buyer_has_cards():
+                                    print(
+                                        f"\n██╗ Owned cards:\n{market.get_buyer_cards(market.get_current_id())}"
+                                    )
+                                else:
+                                    print("\n██╗ You don't have any cards.\n╚═╝\n")
+
+                            case 'ost':
+
+                                card_name = input("Card name: ")
+                                if market.buyer_owns_this_card(market.get_current_id(), card_name):
+                                    market.get_buyer_card_stats(market.get_current_id(), card_name)
+                                else:
+                                    print(f"\n██╗ You don't own {card_name.title()} card.\n╚═╝\n")
 
                             case 'bc':
 
                                 card_name = input("Card name: ")
-                                if marketplace.has_card(card_name):
-                                    if marketplace.card_is_for_sale():
-                                        if marketplace.can_purchase():
-                                            marketplace.purchase(card_name, marketplace.get_current_id())
-                                        else: print("\n██╗ You can't make this purchase at the moment.\n╚═╝\n")
+                                if market.has_card(card_name):
+                                    if market.card_is_for_sale(card_name):
+                                        if market.can_purchase(card_name, market.get_current_id()):
+                                            market.purchase(card_name, market.get_current_id(), )
+                                        else:
+                                            print("\n██╗ You can't make this purchase at the moment.\n╚═╝\n")
                                     else:
                                         print(f"\n██╗ {card_name.title()} it is not for sale at the moment.\n╚═╝\n")
                                 else:
@@ -103,27 +125,27 @@ if __name__ == '__main__':
                             case 'cc':
 
                                 print(
-                                    '\n██╗ Current Balance: ' + str(marketplace.get_buyer_balance(marketplace.get_current_id())) + " Coins\n╚═╝\n"
+                                    '\n██╗ Current Balance: ' + str(market.get_buyer_balance(market.get_current_id())) + " Coins\n╚═╝\n"
                                 )
 
                             case 'ac':
 
                                 amount = int(input("Amount: "))
-                                marketplace.add_buyer_coins(marketplace.get_current_id(), amount)
+                                market.add_buyer_coins(market.get_current_id(), amount)
                                 print(
-                                    '\n██╗ Current Balance: ' + str(marketplace.get_buyer_balance(marketplace.get_current_id())) + " Coins\n╚═╝\n"
+                                    '\n██╗ Current Balance: ' + str(market.get_buyer_balance(market.get_current_id())) + " Coins\n╚═╝\n"
                                 )
 
                             case 'cs':
 
                                 print(
-                                    '\n██╗ Current Balance: ' + str(marketplace.get_buyer_spent_coins(marketplace.get_current_id())) + " Coins\n╚═╝\n"
+                                    '\n██╗ Current Balance: ' + str(market.get_buyer_spent_coins(market.get_current_id())) + " Coins\n╚═╝\n"
                                 )
 
                             case 'id':
 
-                                if marketplace.get_current_id() > 0:
-                                    print(f"\n██╗ Current User ID: {marketplace.get_current_id()}.\n╚═╝\n")
+                                if market.get_current_id() > 0:
+                                    print(f"\n██╗ Current User ID: {market.get_current_id()}.\n╚═╝\n")
                                 else:
                                     print(f"\n██╗ Not a valid ID.\n╚═╝\n")
 
@@ -153,14 +175,22 @@ if __name__ == '__main__':
 
                     match cmd:
 
-                        case 'ac':
+                        case 'lc':
 
-                            if marketplace.has_cards_for_sale():
+                            if market.has_cards_for_sale():
                                 print(
-                                    f"\n██╗ Current available cards:\n╚═╝\n{marketplace.get_buyer_list()}\n╚═╝\n"
+                                    f"\n██╗ Current available cards:\n{market.get_listed_cards()}\n╚═╝\n"
                                 )
                             else:
                                 print(f"\n██╗ No card available at the moment.\n╚═╝\n")
+
+                        case 'bcd':
+
+                            user_id = int(input("User ID: "))
+                            if market.buyer_exists(user_id):
+                                print(market.get_buyer_cards(user_id))
+                            else:
+                                print(f"\n██╗ {user_id} is not a valid user user ID.\n╚═╝\n")
 
                         case 'lcd':
 
@@ -171,8 +201,8 @@ if __name__ == '__main__':
                             position = input('Position: ').upper()
                             team = input('Team: ')
                             price = int(input('Price: '))
-                            marketplace.list_card(name, overall, position, team, price)
-                            if marketplace.has_card():
+                            market.list_card(name, overall, position, team, price)
+                            if market.has_card(name):
                                 print(docs.LISTED)
                             else:
                                 print('\n██╗ Please check your parameters.\n╚═╝\n')
@@ -181,8 +211,8 @@ if __name__ == '__main__':
                         case 'ucd':
 
                             card_name = input("Card name: ")
-                            if marketplace.has_card(card_name):
-                                marketplace.remove_card()
+                            if market.has_card(card_name):
+                                market.remove_card()
                                 print(docs.UNLISTED)
                             else:
                                 print(f"\n██╗ {card_name.title()}'s card it's not available at the moment.\n╚═╝\n")
@@ -197,18 +227,18 @@ if __name__ == '__main__':
 
                         case 'bl':
 
-                            if marketplace.has_buyers():
-                                print(marketplace.get_buyer_list())
+                            if market.has_buyers():
+                                print(market.get_buyer_list())
 
                         case 'cb':
 
                             temp_id = int(input("User ID: "))
-                            if marketplace.has_buyer_registered(temp_id):
-                                print(f"\n██╗ {marketplace.get_buyer(temp_id)}\n╚═╝\n")
+                            if market.has_buyer_registered(temp_id):
+                                print(f"\n██╗ {market.get_buyer(temp_id)}\n╚═╝\n")
 
                         case 'cmp':
 
-                            print(f"\n██╗ Current profit: {marketplace.get_market_profit()}.\n╚═╝\n")
+                            print(f"\n██╗ Current profit: {market.get_market_profit()}.\n╚═╝\n")
 
                         case 'h':
 
@@ -225,8 +255,8 @@ if __name__ == '__main__':
 
             case 'id':
 
-                if marketplace.get_current_id() > 0:
-                    print(f"\n██╗ Current User ID: {marketplace.get_current_id()}.\n╚═╝\n")
+                if market.get_current_id() > 0:
+                    print(f"\n██╗ Current User ID: {market.get_current_id()}.\n╚═╝\n")
                 else:
                     print(f"\n██╗ Not a valid ID.\n╚═╝\n")
 
