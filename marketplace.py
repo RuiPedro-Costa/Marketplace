@@ -77,7 +77,9 @@ class Marketplace:
         listed_cards = ""
         for card in self.__card_dict.keys():
             listed_cards += (
-                f"\n██║ Name: {card}, Price: {self.get_card_price(card)}, For sale: {self.card_is_for_sale(card)}"
+                f"\n██║ Name: {card}, " +
+                f"Price: {self.get_card_price(card)}, " +
+                f"For sale: {self.card_is_for_sale(card)}"
             )
         return listed_cards
 

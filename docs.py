@@ -11,7 +11,7 @@ MENU = '''
                     ██║ Select buyer          (s) ██║
                     ██║ Buyer Menu            (b) ██║
                     ██║ Admin Menu            (a) ██║
-                    ██║ Current User ID      (id) ██║
+                    ██║ Current User         (id) ██║
                     ██║ Exit                  (e) ██║
                     ████████████████████████████████║
                     ╚═══════════════════════════════╝
@@ -35,7 +35,7 @@ SELECT = '''
                             ██╔═══════════════════════════██║
                             ██║ Create New Buyer     (nb) ██║
                             ██║ Select Buyer         (sb) ██║
-                            ██║ Current User ID      (id) ██║
+                            ██║ Current User         (id) ██║
                             ██║ Help                  (h) ██║
                             ██║ Main Menu             (m) ██║
                             ██║ Exit                  (e) ██║
@@ -62,7 +62,7 @@ BUYER = '''
                         ██║ Check Balance        (cc) ██║
                         ██║ Add Coins            (ac) ██║
                         ██║ Check Coins Spent    (cs) ██║
-                        ██║ Current User ID      (id) ██║
+                        ██║ Current User         (id) ██║
                         ██║ Help                  (h) ██║
                         ██║ Main Menu             (m) ██║
                         ██║ Exit                  (e) ██║

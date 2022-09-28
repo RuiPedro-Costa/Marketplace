@@ -44,9 +44,9 @@ class Buyer:
 
     def owned_cards(self) -> str:
         card_collection = ""
-        for n, c in range(len(self.__card_collection)):
+        for card in self.__card_collection.keys():
             card_collection += (
-                f"\n██║ Name: {n}"
+                f"\n██║ Name: {card}"
             )
         return card_collection
 
@@ -55,5 +55,11 @@ class Buyer:
 
     def __str__(self):
         return (
-            f"Name: {self.__buyer_name}\nCoins Spent: {self.__coins_spent}\nCards: {len(self.__card_collection)}"
+            f"""
+██╗ Buyer:
+██║ Name: {self.__buyer_name}
+██║ Coins Spent: {self.__coins_spent}
+██║ Cards: {len(self.__card_collection)}
+╚═╝\n
+"""
         )
