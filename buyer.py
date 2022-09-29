@@ -31,7 +31,7 @@ class Buyer:
     def get_coins_spent(self) -> int:
         return self.__coins_spent
 
-    def get_username(self) -> str:
+    def get_buyer_name(self) -> str:
         return self.__buyer_name
 
     def owns_this_card(self, card_name: str) -> bool:
@@ -51,7 +51,7 @@ class Buyer:
         return card_collection
 
     def owned_card_stats(self, name: str) -> str:
-        return self.__card_collection[name]
+        return self.__card_collection.get(name)
 
     def __str__(self):
         return (
@@ -59,7 +59,7 @@ class Buyer:
 ██╗ Buyer:
 ██║ Name: {self.__buyer_name}
 ██║ Coins Spent: {self.__coins_spent}
-██║ Cards: {len(self.__card_collection)}
+██║ Number of Cards: {len(self.__card_collection)}
 ╚═╝\n
 """
         )

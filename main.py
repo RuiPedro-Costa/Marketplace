@@ -4,7 +4,7 @@ import docs
 if __name__ == '__main__':
 
     command = ''
-    marketplace = Marketplace.create_marketplace()
+    mp = Marketplace.create_marketplace()
     print(docs.LOGO1)
 
     while command is not None:
@@ -28,25 +28,25 @@ if __name__ == '__main__':
                         case 'nb':
 
                             username = input("Name: ")
-                            marketplace.create_new_buyer(username)
-                            marketplace.select_id(marketplace.get_buyer_id(username))
+                            mp.create_new_buyer(username)
+                            mp.select_id(mp.get_buyer_id(username))
                             cmd = None
 
                         case 'sb':
 
                             username = input("Name: ")
-                            if marketplace.buyer_exists(marketplace.get_buyer_id(username)):
-                                marketplace.select_id(marketplace.get_buyer_id(username))
+                            if mp.buyer_exists(mp.get_buyer_id(username)):
+                                mp.select_id(mp.get_buyer_id(username))
                                 cmd = None
                             else:
                                 print(f"\n██╗ {username} is not a valid user user name.\n╚═╝\n")
 
-                        case 'id':
+                        case 'cu':
 
-                            if marketplace.buyer_exists(marketplace.get_current_id()):
-                                print(f"{marketplace.get_buyer(marketplace.get_current_id())}")
+                            if mp.buyer_exists(mp.get_current_id()):
+                                print(f"\n██╗ Buyer Name: {mp.get_buyer_name(mp.get_current_id())}.\n╚═╝\n")
                             else:
-                                print(f"\n██╗ Select a buyer.\n╚═╝\n")
+                                print(f"\n██╗ Please select a buyer first.\n╚═╝\n")
 
                         case 'h':
 
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
             case 'b':
 
-                if marketplace.get_current_id() > 0:
+                if mp.get_current_id() > 0:
 
                     print(docs.BUYER)
                     cmd = ''
@@ -76,10 +76,10 @@ if __name__ == '__main__':
 
                             case 'lc':
 
-                                if marketplace.has_cards_for_sale():
+                                if mp.has_cards_for_sale():
                                     print(
                                         f"\n██╗ Current available cards:\n╚═╝\n" +
-                                        f"{marketplace.get_listed_cards()}\n╚═╝\n"
+                                        f"{mp.get_listed_cards()}\n╚═╝\n"
                                     )
                                 else:
                                     print(f"\n██╗ No cards listed at the moment.\n╚═╝\n")
@@ -87,16 +87,16 @@ if __name__ == '__main__':
                             case 'lst':
 
                                 card_name = input("Card name: ")
-                                if marketplace.has_card(card_name):
-                                    marketplace.get_card_stats(card_name)
+                                if mp.has_card(card_name):
+                                    mp.get_card_stats(card_name)
                                 else:
                                     print(f"\n██╗ {card_name.title()}'s card is not listed\n╚═╝\n")
 
                             case 'oc':
 
-                                if marketplace.buyer_has_cards(marketplace.get_current_id()):
+                                if mp.buyer_has_cards(mp.get_current_id()):
                                     print(
-                                        f"\n██╗ Owned cards:\n{marketplace.get_buyer_cards(marketplace.get_current_id())}\n╚═╝\n"
+                                        f"\n██╗ Owned cards:\n{mp.get_buyer_cards(mp.get_current_id())}\n╚═╝\n"
                                     )
                                 else:
                                     print("\n██╗ You don't have any cards.\n╚═╝\n")
@@ -104,18 +104,19 @@ if __name__ == '__main__':
                             case 'ost':
 
                                 card_name = input("Card name: ")
-                                if marketplace.buyer_owns_this_card(marketplace.get_current_id(), card_name):
-                                    marketplace.get_buyer_card_stats(marketplace.get_current_id(), card_name)
+                                if mp.buyer_owns_this_card(mp.get_current_id(), card_name):
+                                    print(mp.get_buyer_card_stats(mp.get_current_id(), card_name))
                                 else:
                                     print(f"\n██╗ You don't own {card_name.title()} card.\n╚═╝\n")
 
                             case 'bc':
 
                                 card_name = input("Card name: ")
-                                if marketplace.has_card(card_name):
-                                    if marketplace.card_is_for_sale(card_name):
-                                        if marketplace.can_purchase(card_name, marketplace.get_current_id()):
-                                            marketplace.purchase(card_name, marketplace.get_current_id(), )
+                                if mp.has_card(card_name):
+                                    if mp.card_is_for_sale(card_name):
+                                        if mp.can_purchase(card_name, mp.get_current_id()):
+                                            mp.purchase(card_name, mp.get_current_id(), str(mp.get_card_stats()))
+                                            print(docs.BOUGHT)
                                         else:
                                             print("\n██╗ You can't purchase this at the moment.\n╚═╝\n")
                                     else:
@@ -127,17 +128,17 @@ if __name__ == '__main__':
 
                                 print(
                                     '\n██╗ Current Balance: ' +
-                                    str(marketplace.get_buyer_balance(marketplace.get_current_id())) +
+                                    str(mp.get_buyer_balance(mp.get_current_id())) +
                                     " Coins\n╚═╝\n"
                                 )
 
                             case 'ac':
 
                                 amount = int(input("Amount: "))
-                                marketplace.add_buyer_coins(marketplace.get_current_id(), amount)
+                                mp.add_buyer_coins(mp.get_current_id(), amount)
                                 print(
                                     '\n██╗ Current Balance: ' +
-                                    str(marketplace.get_buyer_balance(marketplace.get_current_id())) +
+                                    str(mp.get_buyer_balance(mp.get_current_id())) +
                                     " Coins\n╚═╝\n"
                                 )
 
@@ -145,14 +146,14 @@ if __name__ == '__main__':
 
                                 print(
                                     '\n██╗ Current Balance: ' +
-                                    str(marketplace.get_buyer_spent_coins(marketplace.get_current_id())) +
+                                    str(mp.get_buyer_spent_coins(mp.get_current_id())) +
                                     " Coins\n╚═╝\n"
                                 )
 
-                            case 'id':
+                            case 'cu':
 
-                                if marketplace.buyer_exists(marketplace.get_current_id()):
-                                    print(f"{marketplace.get_buyer(marketplace.get_current_id())}")
+                                if mp.buyer_exists(mp.get_current_id()):
+                                    print(f"\n██╗ Buyer Name: {mp.get_buyer_name(mp.get_current_id())}.\n╚═╝\n")
                                 else:
                                     print(f"\n██╗ Please select a buyer first.\n╚═╝\n")
 
@@ -184,46 +185,62 @@ if __name__ == '__main__':
 
                         case 'lc':
 
-                            if marketplace.has_cards_for_sale():
+                            if mp.has_cards_for_sale():
                                 print(
                                     f"\n██╗ Current available cards:\n╚═╝\n" +
-                                    f"{marketplace.get_listed_cards()}\n╚═╝\n"
+                                    f"{mp.get_listed_cards()}\n╚═╝\n"
                                 )
                             else:
                                 print(f"\n██╗ No card available at the moment.\n╚═╝\n")
 
+                        case 'lst':
+
+                            card_name = input("Card name: ")
+                            if mp.has_card(card_name):
+                                mp.get_card_stats(card_name)
+                            else:
+                                print(f"\n██╗ {card_name.title()}'s card is not listed\n╚═╝\n")
+
                         case 'bcd':
 
+                            # answer is not being forced into id or name
+
+                            answer = input("Search by \"id\" or \"name\"? ")
+                            if answer == "id":
+                                if mp.buyer_exists(answer):
+                                    if mp.buyer_has_cards(answer):
+                                        print(mp.get_buyer_cards(answer))
+                                    else:
+                                        print(f"\n██╗ User {answer} does not have any cards.\n╚═╝\n")
+                                else:
+                                    print(f"\n██╗ {answer} is not a valid user ID.\n╚═╝\n")
+                            elif answer == "name" and mp.buyer_exists(mp.get_buyer_id(answer)):
+                                if mp.buyer_exists(mp.get_buyer_id(answer)):
+                                    if mp.buyer_has_cards(mp.get_buyer_id(answer)):
+                                        print(mp.get_buyer_cards(mp.get_buyer_id(answer)))
+                                    else:
+                                        print(f"\n██╗ {answer} does not have any cards.\n╚═╝\n")
+                                else:
+                                    print(f"\n██╗ {answer} is not a valid name.\n╚═╝\n")
+
                             user_id = int(input("User ID: "))
-                            if marketplace.buyer_exists(user_id):
-                                print(marketplace.get_buyer_cards(user_id))
+                            if mp.buyer_exists(user_id):
+                                if mp.buyer_has_cards(user_id):
+                                    print(mp.get_buyer_cards(user_id))
+                                else:
+                                    print(f"\n██╗ {user_id} does not have any cards.\n╚═╝\n")
                             else:
                                 print(f"\n██╗ {user_id} is not a valid user user ID.\n╚═╝\n")
 
-                        case 'lcd':
-
-                            print("\n██╗ Please insert your card parameters.\n╚═╝\n")
-
-                            name = input('\nName: ')
-                            overall = int(input('Overall: '))
-                            position = input('Position: ').upper()
-                            team = input('Team: ')
-                            price = int(input('Price: '))
-                            marketplace.list_card(name, overall, position, team, price)
-                            if marketplace.has_card(name):
-                                print(docs.LISTED)
-                            else:
-                                print('\n██╗ Please check your parameters.\n╚═╝\n')
-                                pass
-
-                        case 'ucd':
+                        case 'bst':
 
                             card_name = input("Card name: ")
-                            if marketplace.has_card(card_name):
-                                marketplace.remove_card()
-                                print(docs.UNLISTED)
+                            buyer_id = int(input("Buyer ID: "))
+                            if mp.buyer_owns_this_card(buyer_id, card_name):
+                                mp.get_buyer_card_stats(buyer_id, card_name)
                             else:
-                                print(f"\n██╗ {card_name.title()}'s card it's not available at the moment.\n╚═╝\n")
+                                print(f"\n██╗ {mp.get_buyer_name(buyer_id)} does not own" +
+                                      f"{card_name}'s card.\n╚═╝\n")
 
                         case 'lp':
 
@@ -233,23 +250,63 @@ if __name__ == '__main__':
 
                             print(docs.POS)
 
+                        case 'lnc':
+
+                            print("\n██╗ Please insert your card parameters.\n╚═╝\n")
+
+                            name = input('\nName: ')
+                            overall = int(input('Overall: '))
+                            position = input('Position: ').upper()
+                            team = input('Team: ')
+                            price = int(input('Price: '))
+                            mp.list_card(name, overall, position, team, price)
+                            if mp.has_card(name):
+                                print(docs.LISTED)
+                            else:
+                                print('\n██╗ Please check your parameters.\n╚═╝\n')
+                                pass
+
+                        case 'ucd':
+
+                            card_name = input("Card name: ")
+                            if mp.has_card(card_name):
+                                mp.remove_card()
+                                print(docs.UNLISTED)
+                            else:
+                                print(f"\n██╗ {card_name.title()}'s card it's not available at the moment.\n╚═╝\n")
+
+                        case 'rc':
+
+                            if mp.has_cards_in_record():
+                                card_name = input("Card name: ")
+                                if mp.card_in_record(card_name):
+                                    print(mp.get_card_from_record(card_name))
+                                else:
+                                    print(f"\n██╗ {card_name.title()}'s card is not on record.\n╚═╝\n")
+                            else:
+                                print("\n██╗ There are no cards on record.\n╚═╝\n")
+
                         case 'bl':
 
-                            if marketplace.has_buyers():
+                            if mp.has_buyers():
                                 print(
                                     "\n██╗ Registered buyers:\n╚═╝\n" +
-                                    f"{marketplace.get_buyer_list()}"
+                                    f"{mp.get_buyer_list()}"
                                 )
 
                         case 'cb':
 
-                            temp_id = int(input("User ID: "))
-                            if marketplace.has_buyer_registered(temp_id):
-                                print(f"\n██╗ {marketplace.get_buyer(temp_id)}\n╚═╝\n")
+                            answer = input("Search by \"id\" or \"name\"? ")
+                            if answer == "id" and mp.buyer_exists(answer):
+                                print(f"\n██╗ {mp.get_buyer(answer)}\n╚═╝\n")
+                            if answer == "name" and mp.buyer_exists(mp.get_buyer_id(answer)):
+                                print(f"\n██╗ {mp.get_buyer(mp.get_buyer_id(answer))}\n╚═╝\n")
+                            else:
+                                print(f"\n██╗ No buyer found with {answer} attribute.\n╚═╝\n")
 
-                        case 'cmp':
+                        case 'mst':
 
-                            print(f"\n██╗ Current profit: {marketplace.get_market_profit()}.\n╚═╝\n")
+                            print(mp)
 
                         case 'h':
 
@@ -264,12 +321,12 @@ if __name__ == '__main__':
                             cmd = None
                             command = None
 
-            case 'id':
+            case 'cu':
 
-                if marketplace.buyer_exists(marketplace.get_current_id()):
-                    print(f"{marketplace.get_buyer(marketplace.get_current_id())}")
+                if mp.buyer_exists(mp.get_current_id()):
+                    print(f"\n██╗ Buyer Name: {mp.get_buyer_name(mp.get_current_id())}.\n╚═╝\n")
                 else:
-                    print(f"\n██╗ Select a buyer.\n╚═╝\n")
+                    print(f"\n██╗ Please select a buyer first.\n╚═╝\n")
 
             case 'e':
 

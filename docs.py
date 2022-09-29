@@ -11,7 +11,7 @@ MENU = '''
                     ██║ Select buyer          (s) ██║
                     ██║ Buyer Menu            (b) ██║
                     ██║ Admin Menu            (a) ██║
-                    ██║ Current User         (id) ██║
+                    ██║ Current User         (uc) ██║
                     ██║ Exit                  (e) ██║
                     ████████████████████████████████║
                     ╚═══════════════════════════════╝
@@ -35,7 +35,7 @@ SELECT = '''
                             ██╔═══════════════════════════██║
                             ██║ Create New Buyer     (nb) ██║
                             ██║ Select Buyer         (sb) ██║
-                            ██║ Current User         (id) ██║
+                            ██║ Current User         (uc) ██║
                             ██║ Help                  (h) ██║
                             ██║ Main Menu             (m) ██║
                             ██║ Exit                  (e) ██║
@@ -62,7 +62,7 @@ BUYER = '''
                         ██║ Check Balance        (cc) ██║
                         ██║ Add Coins            (ac) ██║
                         ██║ Check Coins Spent    (cs) ██║
-                        ██║ Current User         (id) ██║
+                        ██║ Current User         (cu) ██║
                         ██║ Help                  (h) ██║
                         ██║ Main Menu             (m) ██║
                         ██║ Exit                  (e) ██║
@@ -81,14 +81,17 @@ ADMIN = '''
                         ████████████████████████████████╗
                         ██╔═══════════════════════════██║
                         ██║ Listed Cards         (lc) ██║
+                        ██║ Listed Card Stats   (lst) ██║
                         ██║ Buyer Cards         (bcd) ██║
-                        ██║ List Card           (lcd) ██║
-                        ██║ Unlist Card         (ucd) ██║
+                        ██║ Buyer Card Stats    (bst) ██║
                         ██║ Listing Pricing      (lp) ██║
                         ██║ Listing Position    (lps) ██║
+                        ██║ List New Card       (lnc) ██║
+                        ██║ Unlist Card         (ucd) ██║
+                        ██║ Get Card From Record (rc) ██║
                         ██║ Buyer list           (bl) ██║
                         ██║ Check Buyer          (cb) ██║
-                        ██║ Market Profit       (cmp) ██║
+                        ██║ Market Stats        (mst) ██║
                         ██║ Help                  (h) ██║
                         ██║ Main Menu             (m) ██║   
                         ██║ Exit                  (e) ██║
