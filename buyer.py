@@ -38,7 +38,7 @@ class Buyer:
         return card_name in self.__card_collection.keys()
 
     def has_cards(self) -> bool:
-        if len(self.__card_collection) > 0:
+        if len(self.__card_collection.keys()) > 0:
             return True
         return False
 
@@ -56,10 +56,9 @@ class Buyer:
     def __str__(self):
         return (
             f"""
-██╗ Buyer:
 ██║ Name: {self.__buyer_name}
 ██║ Coins Spent: {self.__coins_spent}
 ██║ Number of Cards: {len(self.__card_collection)}
-╚═╝\n
+╚═╝
 """
         )

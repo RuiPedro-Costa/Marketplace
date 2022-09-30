@@ -6,10 +6,10 @@ if __name__ == '__main__':
     command = ''
     mp = Marketplace.create_marketplace()
     print(docs.LOGO1)
+    print(docs.MENU)
 
     while command is not None:
 
-        print(docs.MENU)
         command = input("Please select an option: ")
 
         match command:
@@ -30,6 +30,7 @@ if __name__ == '__main__':
                             username = input("Name: ")
                             mp.create_new_buyer(username)
                             mp.select_id(mp.get_buyer_id(username))
+                            print(docs.MENU)
                             cmd = None
 
                         case 'sb':
@@ -37,6 +38,7 @@ if __name__ == '__main__':
                             username = input("Name: ")
                             if mp.buyer_exists(mp.get_buyer_id(username)):
                                 mp.select_id(mp.get_buyer_id(username))
+                                print(docs.MENU)
                                 cmd = None
                             else:
                                 print(f"\n██╗ {username} is not a valid user user name.\n╚═╝\n")
@@ -54,6 +56,7 @@ if __name__ == '__main__':
 
                         case 'm':
 
+                            print(docs.MENU)
                             cmd = None
 
                         case 'e':
@@ -115,7 +118,7 @@ if __name__ == '__main__':
                                 if mp.has_card(card_name):
                                     if mp.card_is_for_sale(card_name):
                                         if mp.can_purchase(card_name, mp.get_current_id()):
-                                            mp.purchase(card_name, mp.get_current_id(), str(mp.get_card_stats()))
+                                            mp.purchase(card_name, mp.get_current_id())
                                             print(docs.BOUGHT)
                                         else:
                                             print("\n██╗ You can't purchase this at the moment.\n╚═╝\n")
@@ -155,7 +158,7 @@ if __name__ == '__main__':
                                 if mp.buyer_exists(mp.get_current_id()):
                                     print(f"\n██╗ Buyer Name: {mp.get_buyer_name(mp.get_current_id())}.\n╚═╝\n")
                                 else:
-                                    print(f"\n██╗ Please select a buyer first.\n╚═╝\n")
+                                    print("\n██╗ Please select a buyer first.\n╚═╝\n")
 
                             case 'h':
 
@@ -163,6 +166,7 @@ if __name__ == '__main__':
 
                             case 'm':
 
+                                print(docs.MENU)
                                 cmd = None
 
                             case 'e':
@@ -170,7 +174,7 @@ if __name__ == '__main__':
                                 cmd = None
                                 command = None
                 else:
-                    print("Please select a buyer.")
+                    print("\n██╗ Please select a buyer first.\n╚═╝\n")
 
             case 'a':
 
@@ -203,34 +207,27 @@ if __name__ == '__main__':
 
                         case 'bcd':
 
-                            # answer is not being forced into id or name
-
-                            answer = input("Search by \"id\" or \"name\"? ")
+                            answer = input("Search by 'id' or 'name'? ")
                             if answer == "id":
-                                if mp.buyer_exists(answer):
-                                    if mp.buyer_has_cards(answer):
-                                        print(mp.get_buyer_cards(answer))
+                                userid = int(input("User ID: "))
+                                if mp.buyer_exists(userid):
+                                    if mp.buyer_has_cards(mp.get_buyer_id(userid)):
+                                        print(mp.get_buyer_cards(mp.get_buyer_id(userid)))
                                     else:
-                                        print(f"\n██╗ User {answer} does not have any cards.\n╚═╝\n")
+                                        print(f"\n██╗ {mp.get_buyer(userid)} does not have any cards.\n╚═╝\n")
                                 else:
-                                    print(f"\n██╗ {answer} is not a valid user ID.\n╚═╝\n")
-                            elif answer == "name" and mp.buyer_exists(mp.get_buyer_id(answer)):
-                                if mp.buyer_exists(mp.get_buyer_id(answer)):
-                                    if mp.buyer_has_cards(mp.get_buyer_id(answer)):
-                                        print(mp.get_buyer_cards(mp.get_buyer_id(answer)))
+                                    print(f"{userid} is not a registered ID.")
+                            elif answer == "name":
+                                name = input("Buyer name: ")
+                                if mp.buyer_exists(mp.get_buyer_id(name)):
+                                    if mp.buyer_has_cards(mp.get_buyer_id(name)):
+                                        print(mp.get_buyer_cards(mp.get_buyer_id(name)))
                                     else:
-                                        print(f"\n██╗ {answer} does not have any cards.\n╚═╝\n")
+                                        print(f"\n██╗ {name} does not have any cards.\n╚═╝\n")
                                 else:
-                                    print(f"\n██╗ {answer} is not a valid name.\n╚═╝\n")
-
-                            user_id = int(input("User ID: "))
-                            if mp.buyer_exists(user_id):
-                                if mp.buyer_has_cards(user_id):
-                                    print(mp.get_buyer_cards(user_id))
-                                else:
-                                    print(f"\n██╗ {user_id} does not have any cards.\n╚═╝\n")
+                                    print(f"\n██╗ {name} is not a registered name.\n╚═╝\n")
                             else:
-                                print(f"\n██╗ {user_id} is not a valid user user ID.\n╚═╝\n")
+                                print(f"\n██╗ Not a valid command.\n╚═╝\n")
 
                         case 'bst':
 
@@ -296,13 +293,21 @@ if __name__ == '__main__':
 
                         case 'cb':
 
-                            answer = input("Search by \"id\" or \"name\"? ")
-                            if answer == "id" and mp.buyer_exists(answer):
-                                print(f"\n██╗ {mp.get_buyer(answer)}\n╚═╝\n")
-                            if answer == "name" and mp.buyer_exists(mp.get_buyer_id(answer)):
-                                print(f"\n██╗ {mp.get_buyer(mp.get_buyer_id(answer))}\n╚═╝\n")
+                            answer = input("Search by 'id' or 'name'? ")
+                            if answer == "id":
+                                userid = int(input("User ID: "))
+                                if mp.buyer_exists(userid):
+                                    print(mp.get_buyer(userid))
+                                else:
+                                    print(f"{userid} is not a registered ID.")
+                            elif answer == "name":
+                                name = input("Buyer name: ")
+                                if mp.buyer_exists(mp.get_buyer_id(name)):
+                                    print(mp.get_buyer(mp.get_buyer_id(name)))
+                                else:
+                                    print(f"\n██╗ {name} is not a registered name.\n╚═╝\n")
                             else:
-                                print(f"\n██╗ No buyer found with {answer} attribute.\n╚═╝\n")
+                                print(f"\n██╗ Not a valid command.\n╚═╝\n")
 
                         case 'mst':
 
@@ -313,7 +318,7 @@ if __name__ == '__main__':
                             print(docs.ADMIN)
 
                         case 'm':
-
+                            print(docs.MENU)
                             cmd = None
 
                         case 'e':
@@ -326,7 +331,7 @@ if __name__ == '__main__':
                 if mp.buyer_exists(mp.get_current_id()):
                     print(f"\n██╗ Buyer Name: {mp.get_buyer_name(mp.get_current_id())}.\n╚═╝\n")
                 else:
-                    print(f"\n██╗ Please select a buyer first.\n╚═╝\n")
+                    print("\n██╗ Please select a buyer first.\n╚═╝\n")
 
             case 'e':
 

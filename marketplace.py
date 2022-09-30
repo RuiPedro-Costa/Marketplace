@@ -18,7 +18,7 @@ class Marketplace:
     __record_counter: int
     __buyer_dict: dict[int, Buyer]
     __card_dict: dict[str, Card]
-    __market_record: dict[int: dict[str: str]]
+    __market_record: dict[int: dict[str: Card]]
     __market_profit: int
     __current_id: int
 
@@ -72,13 +72,13 @@ class Marketplace:
     def select_id(self, input_id: int) -> None:
         self.__current_id = input_id
 
-    def purchase(self, card_name: str, buyer_id: int, card_str: str) -> None:
+    def purchase(self, card_name: str, buyer_id: int) -> None:
         amount = self.__card_dict.get(card_name).get_price()
         self.__card_dict.get(card_name).remove_from_sale()
         self.__market_profit += amount
         self.__buyer_dict.get(buyer_id).purchase(amount, card_name, self.__card_dict[card_name])
         self.__record_counter += 1
-        self.__market_record[self.__record_counter] = {card_name: card_str}
+        self.__market_record[self.__record_counter] = {card_name: self.__card_dict.get(card_name)}
         self.remove_card(card_name)
 
     def add_buyer_coins(self, buyer_id: int, amount: int) -> None:
@@ -97,13 +97,13 @@ class Marketplace:
         return self.__record_counter > 0
 
     def card_in_record(self, card_name: str) -> bool:
-        return card_name in self.__market_record.items()
+        return card_name in self.__market_record.values()
 
     def get_card_from_record(self, card_name: str) -> str:
-        for card_info in self.__market_record.values():
-            for name in card_info.keys():
+        for card in self.__market_record.values():
+            for name in card.keys():
                 if card_name == name:
-                    return card_info[name]
+                    return card[name]
 
     def get_listed_cards(self) -> str:
         listed_cards = ""
