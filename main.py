@@ -267,7 +267,7 @@ if __name__ == '__main__':
 
                             card_name = input("Card name: ")
                             if mp.has_card(card_name):
-                                mp.remove_card()
+                                mp.remove_card_from_sale()
                                 print(docs.UNLISTED)
                             else:
                                 print(f"\n██╗ {card_name.title()}'s card it's not available at the moment.\n╚═╝\n")
@@ -276,7 +276,7 @@ if __name__ == '__main__':
 
                             if mp.has_cards_in_record():
                                 card_name = input("Card name: ")
-                                if mp.card_in_record(card_name):
+                                if mp.has_this_card_in_record(card_name):
                                     print(mp.get_card_from_record(card_name))
                                 else:
                                     print(f"\n██╗ {card_name.title()}'s card is not on record.\n╚═╝\n")
