@@ -88,7 +88,9 @@ ADMIN = '''
                         ██║ Listing Position    (lps) ██║
                         ██║ List New Card       (lnc) ██║
                         ██║ Unlist Card         (ucd) ██║
-                        ██║ Get Card From Record (rc) ██║
+                        ██║ Get Record Cards     (rc) ██║
+                        ██║ Get Record Card     (grc) ██║
+                        ██║ Remove Record Card  (rrc) ██║
                         ██║ Buyer list           (bl) ██║
                         ██║ Check Buyer          (cb) ██║
                         ██║ Market Stats        (mst) ██║

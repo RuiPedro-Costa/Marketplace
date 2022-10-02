@@ -227,7 +227,7 @@ if __name__ == '__main__':
                                 else:
                                     print(f"\n██╗ {name} is not a registered name.\n╚═╝\n")
                             else:
-                                print(f"\n██╗ Not a valid command.\n╚═╝\n")
+                                print("\n██╗ Not a valid command.\n╚═╝\n")
 
                         case 'bst':
 
@@ -275,13 +275,49 @@ if __name__ == '__main__':
                         case 'rc':
 
                             if mp.has_cards_in_record():
-                                card_name = input("Card name: ")
-                                if mp.has_this_card_in_record(card_name):
-                                    print(mp.get_card_from_record(card_name))
-                                else:
-                                    print(f"\n██╗ {card_name.title()}'s card is not on record.\n╚═╝\n")
+                                print(
+                                    "\n██╗ Cards on record:\n╚═╝\n" +
+                                    mp.get_record_cards() +
+                                    "╚═╝\n"
+                                )
                             else:
-                                print("\n██╗ There are no cards on record.\n╚═╝\n")
+                                print("\n██╗ We have no cards on record\n╚═╝\n")
+
+                        case 'grc':
+
+                            answer = input("Search byr 'id' or 'name'? ")
+                            if answer == 'id':
+                                purchase_id = int(input("Purchase ID: "))
+                                if mp.has_cards_in_record():
+                                    if mp.has_this_card_in_record(purchase_id):
+                                        print(mp.get_card_from_record(mp.get_record_card_name(purchase_id)))
+                                    else:
+                                        print(
+                                            f"\n██╗ {mp.get_record_card_name(purchase_id).title()}" +
+                                            "'s card is not on record.\n╚═╝\n"
+                                        )
+                                else:
+                                    print("\n██╗ We have no cards on record\n╚═╝\n")
+                            elif answer == 'name':
+                                card_name = input("Card name: ")
+                                if mp.has_cards_in_record():
+                                    if mp.has_this_card_in_record(mp.get_record_purchase_id(card_name)):
+                                        print(mp.get_card_from_record(card_name))
+                                    else:
+                                        print(f"{card_name.title()}'s card is not on record.\n╚═╝\n")
+                                else:
+                                    print("\n██╗ We have no cards on record\n╚═╝\n")
+                            else:
+                                print("\n██╗ Not a valid command.\n╚═╝\n")
+
+                        case 'rrc':
+
+                            if mp.has_cards_in_record():
+                                card_name = input("Card name: ")
+                                mp.remove_card_from_record(card_name)
+                                print("\n██╗ Card removed from record.\n╚═╝\n")
+                            else:
+                                print("\n██╗ We have no cards on record\n╚═╝\n")
 
                         case 'bl':
 
