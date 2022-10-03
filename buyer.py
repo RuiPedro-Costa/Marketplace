@@ -56,7 +56,8 @@ class Buyer:
     def __str__(self):
         return (
             f"""
-██║ Name: {self.__buyer_name}
+██╗ Name: {self.__buyer_name}
+██║ Balance: {self.__coins}
 ██║ Coins Spent: {self.__coins_spent}
 ██║ Number of Cards: {len(self.__card_collection)}
 ╚═╝

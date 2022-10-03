@@ -163,7 +163,7 @@ class Marketplace:
         return buyer_id in self.__buyer_dict.keys()
 
     def get_buyer_list(self) -> str:
-        buyer_list = "\n██╗ Registered buyers:\n"
+        buyer_list = ""
         for buyer in self.__buyer_dict.keys():
             buyer_list += f"██║ {self.__buyer_dict.get(buyer)}\n"
         return buyer_list
@@ -194,9 +194,6 @@ class Marketplace:
     def get_buyer_balance(self, buyer_id: int) -> int:
         return self.__buyer_dict.get(buyer_id).get_balance()
 
-    def get_buyer_spent_coins(self, buyer_id: int) -> int:
-        return self.__buyer_dict.get(buyer_id).get_coins_spent()
-
     # Listed and Record cards deleters:
 
     def remove_card_from_sale(self, card_name: str) -> None:
@@ -204,6 +201,7 @@ class Marketplace:
 
     def remove_card_from_record(self, purchase_id: int) -> None:
         del self.__market_record[purchase_id]
+        self.__record_counter -= 1
 
     # Marketplace representation method:
 

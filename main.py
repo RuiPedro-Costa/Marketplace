@@ -61,8 +61,18 @@ if __name__ == '__main__':
 
                         case 'e':
 
-                            cmd = None
-                            command = None
+                            answer = input("\n██╗ Are you sure (y/n)?")
+                            if answer == 'y':
+                                print(docs.LOGO2)
+                                print(
+                                    "\n██╗ Thank you for playing!" +
+                                    "\n██║ Leaving ErrePe's Marketplace...\n╚═╝\n"
+                                )
+                                cmd = None
+                                command = None
+                            else:
+                                print(docs.SELECT)
+                                pass
 
             case 'b':
 
@@ -82,7 +92,7 @@ if __name__ == '__main__':
                                 if mp.has_cards_for_sale():
                                     print(
                                         f"\n██╗ Current available cards:\n╚═╝\n" +
-                                        f"{mp.get_listed_cards()}\n╚═╝\n"
+                                        f"{mp.get_listed_cards()}╚═╝\n"
                                     )
                                 else:
                                     print(f"\n██╗ No cards listed at the moment.\n╚═╝\n")
@@ -99,7 +109,8 @@ if __name__ == '__main__':
 
                                 if mp.buyer_has_cards(mp.get_current_id()):
                                     print(
-                                        f"\n██╗ Owned cards:\n{mp.get_buyer_cards(mp.get_current_id())}\n╚═╝\n"
+                                        f"\n██╗ Owned cards:\n╚═╝\n" +
+                                        f"\n{mp.get_buyer_cards(mp.get_current_id())}\n╚═╝\n"
                                     )
                                 else:
                                     print("\n██╗ You don't have any cards.\n╚═╝\n")
@@ -127,13 +138,12 @@ if __name__ == '__main__':
                                 else:
                                     print(f"\n██╗ {card_name.title()}'s card is not listed.\n╚═╝\n")
 
-                            case 'cc':
+                            case 'ps':
 
-                                print(
-                                    '\n██╗ Current Balance: ' +
-                                    str(mp.get_buyer_balance(mp.get_current_id())) +
-                                    " Coins\n╚═╝\n"
-                                )
+                                if mp.buyer_exists(mp.get_current_id()):
+                                    print(mp.get_buyer(mp.get_current_id()))
+                                else:
+                                    print("\n██╗ Please select a buyer first.\n╚═╝\n")
 
                             case 'ac':
 
@@ -142,14 +152,6 @@ if __name__ == '__main__':
                                 print(
                                     '\n██╗ Current Balance: ' +
                                     str(mp.get_buyer_balance(mp.get_current_id())) +
-                                    " Coins\n╚═╝\n"
-                                )
-
-                            case 'cs':
-
-                                print(
-                                    '\n██╗ Current Balance: ' +
-                                    str(mp.get_buyer_spent_coins(mp.get_current_id())) +
                                     " Coins\n╚═╝\n"
                                 )
 
@@ -171,8 +173,17 @@ if __name__ == '__main__':
 
                             case 'e':
 
-                                cmd = None
-                                command = None
+                                answer = input("\n██╗ Are you sure (y/n)?")
+                                if answer == 'y':
+                                    print(docs.LOGO2)
+                                    print(
+                                        "\n██╗ Thank you for playing!" +
+                                        "\n██║ Leaving ErrePe's Marketplace...\n╚═╝\n"
+                                    )
+                                    command = None
+                                else:
+                                    print(docs.BUYER)
+                                    pass
                 else:
                     print("\n██╗ Please select a buyer first.\n╚═╝\n")
 
@@ -192,7 +203,7 @@ if __name__ == '__main__':
                             if mp.has_cards_for_sale():
                                 print(
                                     f"\n██╗ Current available cards:\n╚═╝\n" +
-                                    f"{mp.get_listed_cards()}\n╚═╝\n"
+                                    f"{mp.get_listed_cards()}╚═╝\n"
                                 )
                             else:
                                 print(f"\n██╗ No card available at the moment.\n╚═╝\n")
@@ -310,7 +321,7 @@ if __name__ == '__main__':
                         case 'rrc':
 
                             if mp.has_cards_in_record():
-                                card_name = input("Card name: ")
+                                card_name = int(input("Purchase ID: "))
                                 mp.remove_card_from_record(card_name)
                                 print("\n██╗ Card removed from record.\n╚═╝\n")
                             else:
@@ -356,8 +367,17 @@ if __name__ == '__main__':
 
                         case 'e':
 
-                            cmd = None
-                            command = None
+                            answer = input("\n██╗ Are you sure (y/n)?")
+                            if answer == 'y':
+                                print(docs.LOGO2)
+                                print(
+                                    "\n██╗ Thank you for playing!" +
+                                    "\n██║ Leaving ErrePe's Marketplace...\n╚═╝\n"
+                                )
+                                command = None
+                            else:
+                                print(docs.ADMIN)
+                                pass
 
             case 'cu':
 
@@ -368,4 +388,18 @@ if __name__ == '__main__':
 
             case 'e':
 
-                command = None
+                answer = input("Are you sure (y/n)?")
+                if answer == 'y':
+                    print(docs.LOGO2)
+                    print(
+                        "\n██╗ Thank you for playing!" +
+                        "\n██║ Leaving ErrePe's Marketplace...\n╚═╝\n"
+                    )
+                    command = None
+                else:
+                    print(docs.MENU)
+                    pass
+
+            case _:
+                print('\n██╗ Command unrecognized.\n╚═╝\n██╗Please try again.\n╚═╝\n')
+                pass

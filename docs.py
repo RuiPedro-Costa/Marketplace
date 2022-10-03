@@ -59,9 +59,8 @@ BUYER = '''
                         ██║ Owned Cards          (oc) ██║
                         ██║ Owned Card Stats    (ost) ██║
                         ██║ Buy Card             (bc) ██║
-                        ██║ Check Balance        (cc) ██║
+                        ██║ Personal Stats       (ps) ██║
                         ██║ Add Coins            (ac) ██║
-                        ██║ Check Coins Spent    (cs) ██║
                         ██║ Current User         (cu) ██║
                         ██║ Help                  (h) ██║
                         ██║ Main Menu             (m) ██║
