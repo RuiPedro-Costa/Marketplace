@@ -83,6 +83,7 @@ class Marketplace:
         self.__market_record[self.__record_counter] = {
             "buyer_id": buyer_id,
             "card_name": card_name,
+            "price": amount,
             "card": self.__card_dict.get(card_name)
         }
         self.remove_card_from_sale(card_name)
@@ -113,7 +114,8 @@ class Marketplace:
             record_cards += (
                 f"\n██║ Purchase ID: {self.get_record_purchase_id(record.get('card_name'))}" +
                 f"\n██║ Buyer ID: {record.get('buyer_id')}" +
-                f"\n██║ Name: {record.get('card_name')}\n"
+                f"\n██║ Name: {record.get('card_name')}" +
+                f"\n██║ Price: {record.get('price')}\n"
             )
         return record_cards
 
@@ -122,14 +124,8 @@ class Marketplace:
             if value["card_name"] == card_name:
                 return key
 
-    def get_card_from_record(self, card_name: str) -> str:
-        for record in self.__market_record.values():
-            if record['card_name'] == card_name:
-                return record.get(card_name)
-
-    def get_record_card_name(self, purchase_id: int) -> str:
-        card_record = self.__market_record.get(purchase_id)
-        return card_record
+    def get_card_from_record(self, purchase_id: int) -> str:
+        return self.__market_record[purchase_id]["card"]
 
     # Listed cards getters:
 
@@ -150,7 +146,7 @@ class Marketplace:
         return card_name in self.__card_dict.keys()
 
     def get_card_stats(self, card_name: str) -> Card:
-        return self.__card_dict.get(card_name)
+        return self.__card_dict[card_name]
 
     def get_card_price(self, card_name: str) -> int:
         return self.__card_dict.get(card_name).get_price()

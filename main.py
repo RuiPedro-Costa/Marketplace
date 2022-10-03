@@ -91,7 +91,7 @@ if __name__ == '__main__':
 
                                 card_name = input("Card name: ")
                                 if mp.has_card(card_name):
-                                    mp.get_card_stats(card_name)
+                                    print(mp.get_card_stats(card_name))
                                 else:
                                     print(f"\n██╗ {card_name.title()}'s card is not listed\n╚═╝\n")
 
@@ -201,7 +201,7 @@ if __name__ == '__main__':
 
                             card_name = input("Card name: ")
                             if mp.has_card(card_name):
-                                mp.get_card_stats(card_name)
+                                print(mp.get_card_stats(card_name))
                             else:
                                 print(f"\n██╗ {card_name.title()}'s card is not listed\n╚═╝\n")
 
@@ -290,19 +290,16 @@ if __name__ == '__main__':
                                 purchase_id = int(input("Purchase ID: "))
                                 if mp.has_cards_in_record():
                                     if mp.has_this_card_in_record(purchase_id):
-                                        print(mp.get_card_from_record(mp.get_record_card_name(purchase_id)))
+                                        print(mp.get_card_from_record(purchase_id))
                                     else:
-                                        print(
-                                            f"\n██╗ {mp.get_record_card_name(purchase_id).title()}" +
-                                            "'s card is not on record.\n╚═╝\n"
-                                        )
+                                        print("\n██╗ This card is not on record.\n╚═╝\n")
                                 else:
-                                    print("\n██╗ We have no cards on record\n╚═╝\n")
+                                    print("\n██╗ We have no cards on record.\n╚═╝\n")
                             elif answer == 'name':
                                 card_name = input("Card name: ")
                                 if mp.has_cards_in_record():
                                     if mp.has_this_card_in_record(mp.get_record_purchase_id(card_name)):
-                                        print(mp.get_card_from_record(card_name))
+                                        print(mp.get_card_from_record(mp.get_record_purchase_id(card_name)))
                                     else:
                                         print(f"{card_name.title()}'s card is not on record.\n╚═╝\n")
                                 else:
