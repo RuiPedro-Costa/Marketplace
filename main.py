@@ -68,11 +68,13 @@ if __name__ == '__main__':
                                     "\n██╗ Thank you for playing!" +
                                     "\n██║ Leaving ErrePe's Marketplace...\n╚═╝\n"
                                 )
-                                cmd = None
                                 command = None
                             else:
                                 print(docs.SELECT)
-                                pass
+
+                        case _:
+                            print('\n██╗ Command unrecognized.\n╚═╝\n██╗ Please try again.\n╚═╝\n')
+                            pass
 
             case 'b':
 
@@ -173,7 +175,7 @@ if __name__ == '__main__':
 
                             case 'e':
 
-                                answer = input("\n██╗ Are you sure (y/n)?")
+                                answer = input("Are you sure (y/n)?")
                                 if answer == 'y':
                                     print(docs.LOGO2)
                                     print(
@@ -184,6 +186,11 @@ if __name__ == '__main__':
                                 else:
                                     print(docs.BUYER)
                                     pass
+
+                            case _:
+                                print('\n██╗ Command unrecognized.\n╚═╝\n██╗ Please try again.\n╚═╝\n')
+                                pass
+
                 else:
                     print("\n██╗ Please select a buyer first.\n╚═╝\n")
 
@@ -377,7 +384,10 @@ if __name__ == '__main__':
                                 command = None
                             else:
                                 print(docs.ADMIN)
-                                pass
+
+                        case _:
+                            print('\n██╗ Command unrecognized.\n╚═╝\n██╗Please try again.\n╚═╝\n')
+                            pass
 
             case 'cu':
 
